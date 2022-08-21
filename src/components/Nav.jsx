@@ -13,7 +13,7 @@ export default function Nav() {
         <h1 className="sr-only">Argent Bank</h1>
       </a>
       <div>
-        <a className="main-nav-item" href="./sign-in.html">
+        <a className="main-nav-item" href="/signin">
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>

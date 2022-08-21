@@ -6,7 +6,6 @@ import iconSecurity from '../img/icon-security.png';
 
 export default function Home() {
   return (
-    <>
       <main>
         <div className="hero">
           <section className="hero-content">
@@ -56,7 +55,5 @@ export default function Home() {
           </div>
         </section>
       </main>
-      
-    </>
   );
 }
