@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SignIn() {
+export default function Login() {
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
@@ -20,7 +20,7 @@ export default function SignIn() {
             <label>Remember me</label>
           </div>
          {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-          <a href="/user" className="sign-in-button">Sign In</a>
+          <a href="/profile" className="sign-in-button">Sign In</a>
           {/* !-- SHOULD BE THE BUTTON BELOW  */}
           {/* <!-- <button className="sign-in-button">Sign In</button> --> */}
         </form>

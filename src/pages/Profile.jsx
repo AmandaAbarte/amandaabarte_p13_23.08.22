@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function User() {
+export default function Profile() {
   return (
     <main className="main bg-dark">
       <div className="header">
