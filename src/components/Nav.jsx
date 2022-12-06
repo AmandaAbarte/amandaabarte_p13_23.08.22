@@ -1,7 +1,9 @@
 import React from "react";
-import BankLogo from '../img/argentBankLogo.png';
+import { useSelector } from "react-redux";
+import BankLogo from "../img/argentBankLogo.png";
 
 export default function Nav() {
+  const token = useSelector((state) => state.token);
   return (
     <nav className="main-nav">
       <a className="main-nav-logo" href="/">
@@ -15,7 +17,7 @@ export default function Nav() {
       <div>
         <a className="main-nav-item" href="/login">
           <i className="fa fa-user-circle"></i>
-          Sign In
+          {token !== "" ? "Log out" : "Sign in"}
         </a>
       </div>
     </nav>
