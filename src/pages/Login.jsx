@@ -1,65 +1,51 @@
 import React from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Login() {
-  const [token, setToken] = useState("");
-  const user = {
-    email: "steve@rogers.com",
-    password: "password456",
-  };
-  function getToken(e) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  //update form data on change
+  function handleInput(event) {
+    const name = event.target.id;
+    const value = event.target.value;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
+
+  //axios call to get token to authenticate user login
+  function login(e) {
     e.preventDefault();
     axios({
-      // Endpoint to send files
       url: "http://localhost:3001/api/v1/user/login/",
       method: "POST",
-
-      // Attaching the form data
-      data: user,
-    }) // Handle the response from backend here
+      data: formData,
+    })
       .then((res) => {
-        console.log("res", res);
-        res.status === 200 && setToken(res.data.body.token);
-        getProfile(res.data.body.token);
-      })
-      .then((res) => {
-        console.log(token);
+        //if status = success => update token and navigate to profile page
+        if (res.status === 200) {
+          dispatch({
+            type: "getToken",
+            token: res.data.body.token,
+          });
+          navigate("/profile");
+        }
       })
       // Catch errors if any
       .catch((err) => {
-        console.log("error", err);
-        console.log(err.toJSON());
+        dispatch({
+          type: "getError",
+          error: err,
+        });
         err.toJSON().status === 400
-          ? console.log("Incorrect login data")
-          : console.log("server error, something went wrong");
-      });
-  }
-  function getProfile(testToken) {
-    console.log(testToken);
-    axios({
-      // Endpoint to send files
-      url: "http://localhost:3001/api/v1/user/profile/",
-      method: "POST",
-      headers: {
-        // Add any auth token here
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${testToken}`,
-      },
-      // // Attaching the form data
-    }) // Handle the response from backend here
-      .then((res) => {
-        console.log("res", res);
-        // res.status === 200 && setToken(res.data.body.token);
-      })
-
-      // Catch errors if any
-      .catch((err) => {
-        console.log("error", err);
-        // console.log(err.toJSON());
-        // err.toJSON().status === 400
-        //   ? console.log("Incorrect login data")
-        //   : console.log("server error, something went wrong");
+          ? alert("Incorrect login data")
+          : alert("server error, something went wrong");
       });
   }
 
@@ -70,23 +56,18 @@ export default function Login() {
         <h1>Sign In</h1>
         <form>
           <div className="input-wrapper">
-            <label>Username</label>
-            <input type="text" id="username" />
+            <label>Email</label>
+            <input type="text" id="email" onChange={handleInput} />
           </div>
           <div className="input-wrapper">
             <label>Password</label>
-            <input type="password" id="password" />
+            <input type="password" id="password" onChange={handleInput} />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
             <label>Remember me</label>
           </div>
-          {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-          <a href="/profile" className="sign-in-button">
-            Sign In
-          </a>
-          {/* !-- SHOULD BE THE BUTTON BELOW  */}
-          <button className="sign-in-button" onClick={getToken}>
+          <button className="sign-in-button" onClick={login}>
             Sign In
           </button>
         </form>
