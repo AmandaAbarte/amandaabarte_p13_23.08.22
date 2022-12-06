@@ -1,13 +1,50 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Profile() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
+  const data = useSelector((state) => state.data);
+
+  //axios call to get token to authenticate user login
+  function getProfile(testToken) {
+    axios({
+      url: "http://localhost:3001/api/v1/user/profile/",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${testToken}`,
+      },
+    }) // Handle the response from backend here
+      .then((res) => {
+        console.log("res", res.data.body);
+        dispatch({
+          type: "getProfile",
+          data: res.data.body,
+        });
+      })
+      // Catch errors if any
+      .catch((err) => {
+        console.log("error", err);
+      });
+  }
+  useEffect(() => {
+    if (token === "") {
+      navigate("/login");
+    }
+    getProfile(token);
+  }, []);
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {data.firstName + " " + data.lastName}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>

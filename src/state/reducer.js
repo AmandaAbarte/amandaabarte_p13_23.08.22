@@ -14,6 +14,16 @@ const reducer = (state = initialState, action) => {
         token: action.token,
         error: action.error,
       };
+    case "getError":
+      return {
+        ...state,
+        error: action.error,
+      };
+    case "getProfile":
+      return {
+        ...state,
+        data: action.data,
+      };
     default:
       return state;
   }
