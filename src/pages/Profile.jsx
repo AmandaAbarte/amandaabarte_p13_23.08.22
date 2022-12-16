@@ -4,11 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import Edit from "../components/Edit";
+import { useState } from "react";
+
 export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const data = useSelector((state) => state.data);
+
+  const [isEdit, setIsEdit] = useState(false);
 
   //axios call to get token to authenticate user login
   function getProfile(testToken) {
@@ -21,7 +26,6 @@ export default function Profile() {
       },
     }) // Handle the response from backend here
       .then((res) => {
-        console.log("res", res.data.body);
         dispatch({
           type: "getProfile",
           data: res.data.body,
@@ -32,6 +36,7 @@ export default function Profile() {
         console.log("error", err);
       });
   }
+  //naviagte to login page if no token is detected
   useEffect(() => {
     if (token === "") {
       navigate("/login");
@@ -41,12 +46,23 @@ export default function Profile() {
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {data.firstName + " " + data.lastName}
-        </h1>
-        <button className="edit-button">Edit Name</button>
+        {isEdit ? (
+          <Edit />
+        ) : (
+          <h1>
+            Welcome back
+            <br />
+            {data.firstName + " " + data.lastName}
+          </h1>
+        )}
+        <button
+          className="edit-button"
+          onClick={() => {
+            setIsEdit(!isEdit);
+          }}
+        >
+          Edit Name
+        </button>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
