@@ -19,7 +19,7 @@ export default function Edit() {
           type="text"
           name="lastName"
           id="lastName"
-          value={data.LastName}
+          value={data.lastName}
         />
       </div>
     </>
