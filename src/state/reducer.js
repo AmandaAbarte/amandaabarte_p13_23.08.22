@@ -4,6 +4,7 @@ const initialState = {
   token: "",
   data: "",
   error: "",
+  isEdit: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.data,
+      };
+    case "isEdit":
+      return {
+        ...state,
+        isEdit: action.isEdit,
       };
     default:
       return state;

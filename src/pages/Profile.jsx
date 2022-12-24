@@ -12,8 +12,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const data = useSelector((state) => state.data);
-
-  const [isEdit, setIsEdit] = useState(false);
+  const isEdit = useSelector((state) => state.isEdit);
 
   //axios call to get token to authenticate user login
   function getProfile(testToken) {
@@ -49,20 +48,27 @@ export default function Profile() {
         {isEdit ? (
           <Edit />
         ) : (
-          <h1>
-            Welcome back
-            <br />
-            {data.firstName + " " + data.lastName}
-          </h1>
+          <>
+            <h1>
+              Welcome back
+              <br />
+              {data.firstName + " " + data.lastName}
+            </h1>
+
+            <button
+              className="edit-button"
+              // on click change isEdit to true - shows input fields allowing user to change their name
+              onClick={() => {
+                dispatch({
+                  type: "isEdit",
+                  isEdit: true,
+                });
+              }}
+            >
+              Edit Name
+            </button>
+          </>
         )}
-        <button
-          className="edit-button"
-          onClick={() => {
-            setIsEdit(!isEdit);
-          }}
-        >
-          Edit Name
-        </button>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
