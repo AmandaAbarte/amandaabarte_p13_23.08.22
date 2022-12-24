@@ -2,9 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+## Backend
+
+Fork [This Repository](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API) and follow instructions in the README.md file to populate the database
+
 ## Available Scripts
 
-In the project directory, you can run:
+In this project directory, you can run:
 
 ### `npm start`
 
