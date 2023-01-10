@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Edit from "../components/Edit";
-import { useState } from "react";
 
 export default function Profile() {
   const dispatch = useDispatch();
