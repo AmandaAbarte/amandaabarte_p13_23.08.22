@@ -54,20 +54,25 @@ export default function Login() {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={login}>
           <div className="input-wrapper">
             <label>Email</label>
-            <input type="text" id="email" onChange={handleInput} />
+            <input type="email" id="email" onChange={handleInput} required />
           </div>
           <div className="input-wrapper">
             <label>Password</label>
-            <input type="password" id="password" onChange={handleInput} />
+            <input
+              type="password"
+              id="password"
+              onChange={handleInput}
+              required
+            />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
             <label>Remember me</label>
           </div>
-          <button className="sign-in-button" onClick={login}>
+          <button type="submit" className="sign-in-button">
             Sign In
           </button>
         </form>

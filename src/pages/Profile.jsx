@@ -17,7 +17,7 @@ export default function Profile() {
   function getProfile(testToken) {
     axios({
       url: "http://localhost:3001/api/v1/user/profile/",
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${testToken}`,
