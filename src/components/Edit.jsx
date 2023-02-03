@@ -58,7 +58,6 @@ export default function Edit() {
             setFormData({ ...formData, lastName: e.target.value })
           }
         />
-        <p>{formData.firstName}</p>
         <button
           className="edit-button"
           // on click change isEdit to false - hiding input fields

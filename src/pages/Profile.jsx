@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Edit from "../components/Edit";
-import { useState } from "react";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ export default function Profile() {
   function getProfile(testToken) {
     axios({
       url: "http://localhost:3001/api/v1/user/profile/",
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${testToken}`,
